@@ -71,11 +71,19 @@ export default function App() {
     if (!kunde) { setSendError('Velg om du er tidligere kunde (Ja/Nei).'); return }
     const fd = new FormData(form)
     fd.set('tidligere-kunde', kunde)
-    const body = new URLSearchParams(fd).toString()
+    const payload = Object.fromEntries(fd.entries())
+    payload._subject = `Ny timebestilling – ${`${payload.fornavn || ''} ${payload.etternavn || ''}`.trim() || 'ukjent'}`
+    payload._template = 'table'
+    if (payload.epost) payload._replyto = payload.epost
     setSending(true); setSendError(false)
-    fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body })
-      .then((res) => {
-        if (!res.ok) throw new Error('HTTP ' + res.status)
+    fetch('https://formsubmit.co/ajax/post@langhustannklinikk.no', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(payload),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (String(data.success) !== 'true') throw new Error(data.message || 'send failed')
         setSubmitted(true); setSending(false)
       })
       .catch(() => {
@@ -452,9 +460,8 @@ export default function App() {
                 )}
 
                 {showForm && !submitted && (
-                  <form name="timebestilling" method="POST" data-netlify="true" netlify-honeypot="bot-field" onSubmit={submitForm}>
-                    <input type="hidden" name="form-name" value="timebestilling" />
-                    <p className="bot-field" aria-hidden="true"><label>Ikke fyll ut dette feltet: <input name="bot-field" /></label></p>
+                  <form name="timebestilling" onSubmit={submitForm}>
+                    <input type="text" name="_honey" className="bot-field" tabIndex={-1} autoComplete="off" aria-hidden="true" />
                     <div className="form-required-note">Felt merket <span>*</span> er obligatorisk.</div>
                     <div className="form-section-title">Bestillingsdetaljer</div>
 
