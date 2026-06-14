@@ -55,7 +55,7 @@ a{color:inherit}
         <sc-for list="{{ nav }}" as="link" hint-placeholder-count="5">
           <a href="{{ link.h }}" style="text-decoration:none;color:#45575E;font-size:15.5px;font-weight:500;letter-spacing:.1px;white-space:nowrap" style-hover="color:#0F8C95">{{ link.t }}</a>
         </sc-for>
-        <a href="#kontakt" style="display:inline-flex;align-items:center;gap:8px;background:#1F3A4A;color:#fff;padding:13px 24px;border-radius:999px;font-weight:600;font-size:15.5px;text-decoration:none;white-space:nowrap;box-shadow:0 8px 20px rgba(31,58,74,.18)" style-hover="transform:translateY(-2px);box-shadow:0 12px 26px rgba(31,58,74,.26)">Bestill time</a>
+        <a href="#kontakt" onClick="{{ openForm }}" style="display:inline-flex;align-items:center;gap:8px;background:#1F3A4A;color:#fff;padding:13px 24px;border-radius:999px;font-weight:600;font-size:15.5px;text-decoration:none;white-space:nowrap;box-shadow:0 8px 20px rgba(31,58,74,.18)" style-hover="transform:translateY(-2px);box-shadow:0 12px 26px rgba(31,58,74,.26)">Bestill time</a>
       </nav>
     </sc-if>
 
@@ -75,7 +75,7 @@ a{color:inherit}
       </sc-for>
       <div style="display:flex;gap:10px;margin-top:14px">
         <a href="tel:+4764917250" style="flex:1;text-align:center;text-decoration:none;border:1.5px solid #1F3A4A;color:#1F3A4A;padding:13px;border-radius:12px;font-weight:600">Ring oss</a>
-        <a href="#kontakt" onClick="{{ closeMenu }}" style="flex:1;text-align:center;text-decoration:none;background:#1F3A4A;color:#fff;padding:13px;border-radius:12px;font-weight:600">Bestill time</a>
+        <a href="#kontakt" onClick="{{ openFormMobile }}" style="flex:1;text-align:center;text-decoration:none;background:#1F3A4A;color:#fff;padding:13px;border-radius:12px;font-weight:600">Bestill time</a>
       </div>
     </div>
   </sc-if>
@@ -90,7 +90,7 @@ a{color:inherit}
       <h1 style="font-family:'Jost',sans-serif;font-weight:600;font-size:clamp(36px,5.4vw,60px);line-height:1.06;letter-spacing:-.5px;margin:22px 0 0;color:#1F3A4A;text-wrap:balance">Tannbehandling i trygge, rolige hender</h1>
       <p style="font-size:clamp(16px,1.5vw,19px);line-height:1.65;color:#54666D;margin:22px 0 0;max-width:30em">Hos Langhus Tannklinikk setter vi deg i fokus. Vi tar oss tid, forklarer underveis og legger til rette for smertefri behandling – også for deg som gruer deg til tannlegen.</p>
       <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:32px">
-        <a href="#kontakt" style="display:inline-flex;align-items:center;gap:9px;background:#1F3A4A;color:#fff;padding:16px 30px;border-radius:999px;font-weight:600;font-size:16.5px;text-decoration:none;box-shadow:0 12px 26px rgba(31,58,74,.22)" style-hover="transform:translateY(-2px);box-shadow:0 16px 32px rgba(31,58,74,.3)">Bestill time</a>
+        <a href="#kontakt" onClick="{{ openForm }}" style="display:inline-flex;align-items:center;gap:9px;background:#1F3A4A;color:#fff;padding:16px 30px;border-radius:999px;font-weight:600;font-size:16.5px;text-decoration:none;box-shadow:0 12px 26px rgba(31,58,74,.22)" style-hover="transform:translateY(-2px);box-shadow:0 16px 32px rgba(31,58,74,.3)">Bestill time</a>
         <a href="tel:+4764917250" style="display:inline-flex;align-items:center;gap:10px;background:#fff;color:#1F3A4A;padding:16px 28px;border-radius:999px;font-weight:600;font-size:16.5px;text-decoration:none;border:1.5px solid #CFE3E6" style-hover="border-color:#5CC1C6;background:#F7FCFC">Ring 64 91 72 50</a>
       </div>
       <div style="display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:30px">
@@ -263,7 +263,7 @@ a{color:inherit}
       </div>
       <div style="display:flex;align-items:center;gap:24px">
         <div style="font-family:'Jost',sans-serif;font-weight:700;font-size:clamp(40px,6vw,58px);color:#fff;line-height:1">730<span style="font-size:24px;font-weight:600;color:#8FE0E4"> kr</span></div>
-        <a href="#kontakt" style="display:inline-flex;align-items:center;background:#5CC1C6;color:#0B2730;padding:15px 26px;border-radius:999px;font-weight:700;font-size:15.5px;text-decoration:none" style-hover="background:#7AD3D7">Bestill time</a>
+        <a href="#kontakt" onClick="{{ openForm }}" style="display:inline-flex;align-items:center;background:#5CC1C6;color:#0B2730;padding:15px 26px;border-radius:999px;font-weight:700;font-size:15.5px;text-decoration:none" style-hover="background:#7AD3D7">Bestill time</a>
       </div>
     </div>
 
@@ -448,7 +448,16 @@ a{color:inherit}
 
       <div style="flex:1.7 1 440px">
         <div style="background:#fff;border-radius:24px;padding:clamp(24px,3.5vw,40px);box-shadow:0 20px 46px rgba(31,58,74,.1)">
-          <sc-if value="{{ notSubmitted }}" hint-placeholder-val="{{ true }}">
+          <sc-if value="{{ showIntro }}" hint-placeholder-val="{{ true }}">
+            <div style="display:flex;flex-direction:column;align-items:center;text-align:center;padding:18px 6px">
+              <div style="width:74px;height:74px;border-radius:50%;background:#DDF1F2;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="#0E7D86" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="16" rx="2.5"></rect><path d="M3.5 9.5h17M8 3.5v3M16 3.5v3"></path><path d="M8.5 14.5l2.2 2.2 4-4"></path></svg></div>
+              <h3 style="font-family:'Jost',sans-serif;font-weight:600;font-size:24px;color:#1F3A4A;margin:20px 0 0">Bestill time online</h3>
+              <p style="font-size:15.5px;line-height:1.65;color:#56686F;margin:12px auto 0;max-width:30em">Fyll ut et kort skjema med ønsket dag og kontaktinformasjon, så tar vi kontakt for å bekrefte timen.</p>
+              <button onClick="{{ openForm }}" style="margin-top:24px;background:#1F3A4A;color:#fff;border:none;padding:16px 32px;border-radius:999px;font-weight:600;font-size:16.5px;cursor:pointer;font-family:inherit;box-shadow:0 12px 26px rgba(31,58,74,.2)" style-hover="background:#2C5161">Bestill time</button>
+              <div style="font-size:13.5px;color:#809298;margin-top:18px">Eller ring oss på <a href="tel:+4764917250" style="color:#0E7D86;font-weight:600;text-decoration:none">64 91 72 50</a></div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ showForm }}" hint-placeholder-val="{{ false }}">
             <form name="timebestilling" method="POST" data-netlify="true" netlify-honeypot="bot-field" onSubmit="{{ submitForm }}">
               <input type="hidden" name="form-name" value="timebestilling">
               <p style="position:absolute;left:-9999px" aria-hidden="true"><label>Ikke fyll ut dette feltet: <input name="bot-field"></label></p>
@@ -609,7 +618,7 @@ a{color:inherit}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900}}">
 class Component extends DCLogic {
-  state = { w: 1200, menuOpen: false, open: {}, submitted: false, kunde: null, rev: 0, revPaused: false };
+  state = { w: 1200, menuOpen: false, open: {}, submitted: false, kunde: null, rev: 0, revPaused: false, showForm: false };
   _visible() { const w = this.state.w; return w >= 1000 ? 3 : w >= 640 ? 2 : 1; }
   _maxRev() { return Math.max(0, 8 - this._visible()); }
   componentDidMount() {
@@ -848,7 +857,10 @@ class Component extends DCLogic {
       nav, heroChips, fearPoints, services, omStats, team,
       days, timeslots, purposes,
       submitted: this.state.submitted,
-      notSubmitted: !this.state.submitted,
+      showForm: this.state.showForm && !this.state.submitted,
+      showIntro: !this.state.showForm && !this.state.submitted,
+      openForm: () => { this.setState({ showForm: true }); },
+      openFormMobile: () => { this.setState({ showForm: true, menuOpen: false }); },
       kundeJaStyle: pillBase + (kunde === 'Ja' ? kundeSel : kundeUn),
       kundeNeiStyle: pillBase + (kunde === 'Nei' ? kundeSel : kundeUn),
       kunde: this.state.kunde || '',
