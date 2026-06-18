@@ -41,6 +41,7 @@ export default function App() {
   const [sendError, setSendError] = useState(false)
   const revPausedRef = useRef(revPaused)
   revPausedRef.current = revPaused
+  const formTopRef = useRef(null)
 
   const isDesktop = w >= 900
   const isMobile = !isDesktop
@@ -63,7 +64,22 @@ export default function App() {
   }, [maxRev])
 
   const toggle = (id) => setOpen((s) => ({ ...s, [id]: !s[id] }))
-  const openTheForm = () => setShowForm(true)
+  const openTheForm = (e) => {
+    if (e && e.preventDefault) e.preventDefault()
+    setShowForm(true)
+  }
+
+  useEffect(() => {
+    if (showForm && formTopRef.current) {
+      setTimeout(() => {
+        const el = formTopRef.current
+        if (!el) return
+        const headerOffset = 92
+        const top = el.getBoundingClientRect().top + window.scrollY - headerOffset
+        window.scrollTo({ top, behavior: 'smooth' })
+      }, 50)
+    }
+  }, [showForm])
 
   const submitForm = (e) => {
     e.preventDefault()
@@ -463,7 +479,7 @@ export default function App() {
                   <form name="timebestilling" onSubmit={submitForm}>
                     <input type="text" name="_honey" className="bot-field" tabIndex={-1} autoComplete="off" aria-hidden="true" />
                     <div className="form-required-note">Felt merket <span>*</span> er obligatorisk.</div>
-                    <div className="form-section-title">Bestillingsdetaljer</div>
+                    <div className="form-section-title" ref={formTopRef}>Bestillingsdetaljer</div>
 
                     <div className="field">
                       <label>Velg ønsket dag<span className="req"> *</span></label>
