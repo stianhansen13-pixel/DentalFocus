@@ -42,6 +42,7 @@ export default function App() {
   const revPausedRef = useRef(revPaused)
   revPausedRef.current = revPaused
   const formTopRef = useRef(null)
+  const successRef = useRef(null)
 
   const isDesktop = w >= 900
   const isMobile = !isDesktop
@@ -108,6 +109,16 @@ export default function App() {
       })
   }
 
+  useEffect(() => {
+    if (submitted && successRef.current) {
+      const el = successRef.current
+      const headerOffset = 92
+      const top = el.getBoundingClientRect().top + window.scrollY - headerOffset
+      window.scrollTo({ top, behavior: 'smooth' })
+      el.focus()
+    }
+  }, [submitted])
+
   const resetForm = () => { setSubmitted(false); setKunde(null); setSendError(false); setSending(false) }
 
   return (
@@ -158,7 +169,7 @@ export default function App() {
             </div>
           </div>
           <div className="hero-media">
-            <img src="/assets/hero.jpg" alt="Tannlege undersøker en avslappet pasient" />
+            <img src="/assets/hero_new.jpg" alt="Tannlege undersøker en avslappet pasient" />
           </div>
         </div>
       </section>
@@ -206,7 +217,7 @@ export default function App() {
       {/* ABOUT */}
       <section id="om-oss" className="about">
         <div className="container section-pad about-grid">
-          <img src="/assets/om-oss.jpg" alt="Tannhelsepersonell holder en gjennomsiktig tannregulering formet som et hjerte" />
+          <img src="/assets/om-oss_new.jpg" alt="Tannhelsepersonell holder en gjennomsiktig tannregulering formet som et hjerte" />
           <div>
             <div className="eyebrow">Om oss</div>
             <h2 className="h2">I hjertet av Langhus</h2>
@@ -478,11 +489,10 @@ export default function App() {
                 {showForm && !submitted && (
                   <form name="timebestilling" onSubmit={submitForm}>
                     <input type="text" name="_honey" className="bot-field" tabIndex={-1} autoComplete="off" aria-hidden="true" />
-                    <div className="form-required-note">Felt merket <span>*</span> er obligatorisk.</div>
                     <div className="form-section-title" ref={formTopRef}>Bestillingsdetaljer</div>
 
                     <div className="field">
-                      <label>Velg ønsket dag<span className="req"> *</span></label>
+                      <label>Velg ønsket dag</label>
                       <select name="onsket-dag" required defaultValue="">
                         <option value="" disabled>Velg dag</option>
                         {days.map((d) => <option key={d} value={d}>{d}</option>)}
@@ -490,7 +500,7 @@ export default function App() {
                     </div>
 
                     <div className="field">
-                      <label>Velg ønsket tidsrom<span className="req"> *</span></label>
+                      <label>Velg ønsket tidsrom</label>
                       <select name="onsket-tidsrom" required defaultValue="">
                         <option value="" disabled>Velg tidsrom</option>
                         {timeslots.map((t) => <option key={t} value={t}>{t}</option>)}
@@ -505,7 +515,7 @@ export default function App() {
                     </div>
 
                     <div className="field wide">
-                      <label>Tidligere kunde<span className="req"> *</span></label>
+                      <label>Tidligere kunde</label>
                       <input type="hidden" name="tidligere-kunde" value={kunde || ''} />
                       <div className="kunde-pills">
                         <div className={'kunde-pill' + (kunde === 'Ja' ? ' sel' : '')} onClick={() => setKunde('Ja')}>Ja</div>
@@ -523,17 +533,17 @@ export default function App() {
 
                     <div className="field-grid">
                       <div>
-                        <label>Fornavn<span className="req"> *</span></label>
+                        <label>Fornavn</label>
                         <input name="fornavn" required />
                       </div>
                       <div>
-                        <label>Etternavn<span className="req"> *</span></label>
+                        <label>Etternavn</label>
                         <input name="etternavn" required />
                       </div>
                     </div>
 
                     <div className="field">
-                      <label>Fødselsdato<span className="req"> *</span></label>
+                      <label>Fødselsdato</label>
                       <input name="fodselsdato" type="date" required />
                     </div>
 
@@ -555,11 +565,11 @@ export default function App() {
 
                     <div className="field-grid" style={{ marginBottom: 24 }}>
                       <div>
-                        <label>E-post<span className="req"> *</span></label>
+                        <label>E-post</label>
                         <input name="epost" type="email" required />
                       </div>
                       <div>
-                        <label>Telefon<span className="req"> *</span></label>
+                        <label>Telefon</label>
                         <input name="telefon" type="tel" required />
                       </div>
                     </div>
@@ -573,7 +583,7 @@ export default function App() {
                 )}
 
                 {submitted && (
-                  <div className="form-success">
+                  <div className="form-success" ref={successRef} tabIndex={-1}>
                     <div className="ic"><svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="#0E7D86" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12.5l4.5 4.5L19 7"></path></svg></div>
                     <h3>Takk for din bestilling!</h3>
                     <p>Vi har mottatt forespørselen din og tar kontakt så snart som mulig for å bekrefte timen. Haster det, ring oss gjerne på <a href={`tel:${PHONE_TEL}`}>{PHONE_DISPLAY}</a>.</p>

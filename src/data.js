@@ -148,14 +148,14 @@ export const tannhelse = [
 ]
 
 export const reviews = [
-  { q: 'Fantastisk – spesielt for deg som er litt redd! Rolige, tålmodige og veldig profesjonelle. De tar seg tid til å forklare hva som skal skje, og sørger for at du føler deg trygg hele veien.', name: 'Marius H.', tag: 'Google · Lokal guide' },
-  { q: 'Utrolig fornøyd med alle besøk her – god forklaring underveis, dyktig utførelse, og ikke minst blide og hyggelige.', name: 'Ingrid S.', tag: 'Google' },
-  { q: 'Trivelige og rene lokaler, topp moderne utstyr og kjempegod service. Det er derfor jeg kommer tilbake.', name: 'Thomas B.', tag: 'Google' },
-  { q: 'Jeg har hatt tannlegeskrekk i mange år, men her følte jeg meg trygg fra første øyeblikk. Anbefales på det varmeste!', name: 'Camilla R.', tag: 'Google' },
-  { q: 'Veldig dyktig og imøtekommende tannlege. Forklarer alt grundig og presser ingenting på deg. Helt topp.', name: 'Henrik L.', tag: 'Google · Lokal guide' },
-  { q: 'Best tannlege jeg har vært hos. Profesjonell, ærlig om hva som faktisk trengs, og rettferdige priser.', name: 'Anette K.', tag: 'Google' },
-  { q: 'Fikk akutt time på kort varsel da jeg hadde sterke smerter. Rask og skånsom behandling – tusen takk!', name: 'Ole-Martin D.', tag: 'Google' },
-  { q: 'Hyggelig personale som tar seg god tid. Jeg gruer meg ikke lenger til å gå til tannlegen.', name: 'Sara N.', tag: 'Google' },
+  { q: 'Tannlegen min her er så dyktig, behagelig og rolig at jeg, som i alle år før har hatt skrekken for tannlegestolen, nå legger mitt liv i hennes hender og lar meg berolige når hun forteller meg hva hun skal gjøre. Ja, hun er fantastisk! Anbefaler henne til store og små!', name: 'Kirsten B.', tag: 'Google' },
+  { q: 'Har brukt disse i mange tiår, og er de siste åra blitt enda mer fornøyd med kundeservice og fagarbeidet.', name: 'Jan Petter M.', tag: 'Google · Lokal guide' },
+  { q: 'Verdens beste og hyggeligste tannlege-team :)', name: 'Kjell Håkon K.', tag: 'Google' },
+  { q: 'Veldig hyggelig og flink tannlege! Anbefales! Fine og rene lokaler og fin atmosfære.', name: 'Gerdur J.', tag: 'Google' },
+  { q: 'Utrolig hyggelig og dyktig tannlege.Anbefales til de som har litt tannlegeskrekk :)', name: 'Irma R.', tag: 'Google' },
+  { q: 'Fantastisk tannklinikk, spesielt for deg som er litt redd! … De to som jobber der er utrolig flinke – rolige, tålmodige og veldig profesjonelle. … Her er du i trygge hender!', name: 'Joakim B.', tag: 'Google' },
+  { q: 'Fantastisk dyktig og betryggende tannlege! Nhung er flink til å forklare prosedyrer, og er hyggelig og beroligende.', name: 'Daniel W.', tag: 'Google · Lokal guide' },
+  { q: 'Fantastisk tannlege! Drar hit fordi Nhung alltid tar seg tid til å gjøre en dyktig jobb. Anbefales !', name: 'Lena S.', tag: 'Google' },
 ]
 
 export const days = ['Mandag', 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag']
