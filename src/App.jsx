@@ -126,7 +126,7 @@ export default function App() {
       {/* HEADER */}
       <header className="header">
         <div className="header-inner">
-          <a href="#top" className="header-logo"><img src="/assets/logo-white.png" alt="Langhus Tannklinikk" /></a>
+          <a href="#top" className="header-logo"><img src="/assets/langhus-horizontal-colour.svg" alt="Langhus Tannklinikk" /></a>
           {isDesktop && (
             <nav className="nav-desktop">
               {nav.map((l) => <a key={l.h} href={l.h} className="nav-link">{l.t}</a>)}
@@ -601,8 +601,7 @@ export default function App() {
         <div className="footer-inner">
           <div className="footer-brand">
             <div className="footer-logo">
-              <img src="/assets/mark-white.png" alt="" />
-              <div className="name">LANGHUS<br /><span>Tannklinikk</span></div>
+              <img src="/assets/langhus-horizontal-reversed.svg" alt="Langhus Tannklinikk" />
             </div>
             <p>Tannlege på Langhus med fokus på trygg, rolig og smertefri behandling – også for deg som gruer deg.</p>
           </div>
