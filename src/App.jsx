@@ -89,24 +89,30 @@ export default function App() {
     const fd = new FormData(form)
     fd.set('tidligere-kunde', kunde)
     const payload = Object.fromEntries(fd.entries())
-    payload._subject = `Ny timebestilling – ${`${payload.fornavn || ''} ${payload.etternavn || ''}`.trim() || 'ukjent'}`
-    payload._template = 'table'
-    if (payload.epost) payload._replyto = payload.epost
+    const navn = `${payload.fornavn || ''} ${payload.etternavn || ''}`.trim()
+    payload.access_key = '4b98555f-e80d-44a8-a448-cfca61c695db'
+    payload.subject = `Ny timebestilling – ${navn || 'ukjent'}`
+    payload.from_name = 'Langhus Tannklinikk – nettside'
+    if (payload.epost) payload.replyto = payload.epost
     setSending(true); setSendError(false)
-    fetch('https://formsubmit.co/ajax/post@langhustannklinikk.no', {
+    const controller = new AbortController()
+    const timeout = setTimeout(() => controller.abort(), 20000)
+    fetch('https://api.web3forms.com/submit', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify(payload),
+      signal: controller.signal,
     })
       .then((res) => res.json())
       .then((data) => {
-        if (String(data.success) !== 'true') throw new Error(data.message || 'send failed')
+        if (data.success !== true) throw new Error(data.message || 'send failed')
         setSubmitted(true); setSending(false)
       })
       .catch(() => {
         setSending(false)
         setSendError('Noe gikk galt under sendingen. Ring oss på 64 91 72 50 eller send e-post til post@langhustannklinikk.no.')
       })
+      .finally(() => clearTimeout(timeout))
   }
 
   useEffect(() => {
